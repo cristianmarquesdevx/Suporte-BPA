@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BPAMAG0500 – BPA | SEMUSA</title>
+  <style>
+    /* Reset e base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: linear-gradient(145deg, #f6f9fc 0%, #e9f1f8 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      max-width: 880px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 48px;
+      box-shadow: 0 30px 60px rgba(0, 20, 40, 0.20), 0 10px 25px rgba(0, 0, 0, 0.05);
+      padding: 48px 40px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 32px 20px;
+        border-radius: 32px;
+      }
+    }
+
+    /* Cabeçalho com logo à direita */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .badge-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #0a2a44;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      padding: 8px 20px;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+
+    .badge-semusa {
+      background: #00843d;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.0rem;
+      padding: 8px 24px;
+      border-radius: 100px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0, 132, 61, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .logo-prefeitura {
+      max-height: 70px;
+      width: auto;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .logo-prefeitura {
+        max-height: 60px;
+      }
+    }
+
+    .titulo {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #0a1e32;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .titulo span {
+      color: #0066b3;
+      background: linear-gradient(135deg, #0066b3, #0099ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitulo {
+      font-size: 1.2rem;
+      color: #2c3e50;
+      margin-bottom: 24px;
+      font-weight: 400;
+      border-left: 4px solid #00843d;
+      padding-left: 18px;
+      background: rgba(0, 132, 61, 0.05);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .descricao {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #1e2f3f;
+      margin-bottom: 32px;
+    }
+
+    .descricao strong {
+      color: #00843d;
+    }
+
+    .beneficios {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 24px;
+      margin: 28px 0 36px;
+      list-style: none;
+    }
+
+    @media (max-width: 550px) {
+      .beneficios {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .beneficios li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.98rem;
+      color: #0f293f;
+      font-weight: 500;
+    }
+
+    .beneficios li::before {
+      content: "✓";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #00843d;
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .download-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 10px 0 10px;
+    }
+
+    .download-item {
+      background: #f0f6fe;
+      border-radius: 20px;
+      padding: 20px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid rgba(0, 102, 179, 0.10);
+      transition: background 0.2s;
+    }
+
+    .download-item:hover {
+      background: #e8f0fd;
+    }
+
+    .info-arquivo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .icone-arquivo {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    .info-arquivo .detalhes {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-arquivo .nome-arquivo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0a1e32;
+    }
+
+    .info-arquivo .tamanho {
+      font-size: 0.85rem;
+      color: #3d5a73;
+    }
+
+    .btn-download {
+      background: #0066b3;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(0, 102, 179, 0.30);
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .btn-download:hover {
+      background: #004d8c;
+      transform: scale(1.02);
+      box-shadow: 0 8px 22px rgba(0, 102, 179, 0.45);
+    }
+
+    .btn-download:active {
+      transform: scale(0.97);
+    }
+
+    .footer {
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.9rem;
+      color: #3b5a78;
+    }
+
+    .footer a {
+      color: #0066b3;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .codigo-ref {
+      background: #e5edf5;
+      padding: 4px 14px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #003b66;
+      letter-spacing: 0.3px;
+    }
+
+    .credito {
+      font-weight: 500;
+      color: #1f4970;
+    }
+
+    .credito strong {
+      color: #0066b3;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+      .titulo {
+        font-size: 2.1rem;
+      }
+      .download-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        padding: 18px;
+      }
+      .info-arquivo {
+        justify-content: center;
+      }
+      .btn-download {
+        justify-content: center;
+        width: 100%;
+      }
+      .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- Cabeçalho: badge SEMUSA à esquerda e logo da prefeitura à direita -->
+    <div class="header">
+      <div class="badge-container">
+        <span class="badge">🏥 Suporte oficial</span>
+        <span class="badge-semusa">SEMUSA</span>
+        <span style="font-size:0.85rem; color:#1f4970; margin-top:4px;">
+          Secretaria Municipal de Saúde
+        </span>
+      </div>
+      <img src="logo_prefeitura.png" alt="Logo da Prefeitura" class="logo-prefeitura" />
+    </div>
+
+    <h1 class="titulo">
+      BPAMAG0500 <span>– BPA</span>
+    </h1>
+    <div class="subtitulo">
+      Boletim de Produção Ambulatorial – Arquivos de suporte
+    </div>
+
+    <p class="descricao">
+      Disponibilizamos os executáveis necessários para o sistema
+      <strong>BPA (Boletim de Produção Ambulatorial)</strong>,
+      utilizado para registro e gerenciamento de atendimentos, procedimentos
+      e produção ambulatorial em unidades de saúde.
+      <br />
+      <span style="background: #e8f0fd; padding: 2px 12px; border-radius: 20px; display: inline-block; margin-top: 8px;">
+        📌 Suporte técnico: <strong>SEMUSA</strong>
+      </span>
+    </p>
+
+    <ul class="beneficios">
+      <li>Registro de atendimentos ambulatoriais</li>
+      <li>Controle de procedimentos realizados</li>
+      <li>Gestão de produção por unidade</li>
+      <li>Relatórios gerenciais completos</li>
+      <li>Integração com prontuário eletrônico</li>
+      <li>Conformidade com padrões do SUS</li>
+    </ul>
+
+    <!-- LISTA DE DOWNLOADS -->
+    <div class="download-list">
+
+      <!-- Arquivo 1: BPAMAG0500.exe -->
+      <div class="download-item">
+        <div class="info-arquivo">
+          <span class="icone-arquivo">⚙️</span>
+          <div class="detalhes">
+            <span class="nome-arquivo">BPAMAG0500.exe</span>
+            <span class="tamanho">~ 52 MB • Instalador principal</span>
+          </div>
+        </div>
+        <a href="BPAMAG0500.exe" class="btn-download" download>
+          ⬇️ Baixar
+        </a>
+      </div>
+
+      <!-- Arquivo 2: BDSIA202606b.exe -->
+      <div class="download-item">
+        <div class="info-arquivo">
+          <span class="icone-arquivo">📊</span>
+          <div class="detalhes">
+            <span class="nome-arquivo">BDSIA202606b.exe</span>
+            <span class="tamanho">~ 38 MB • Módulo SIA/SUS</span>
+          </div>
+        </div>
+        <a href="BDSIA202606b.exe" class="btn-download" download>
+          ⬇️ Baixar
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+      <span>
+        <span class="codigo-ref">BPAMAG0500</span> – versão 2.4.1
+      </span>
+      <span class="credito">
+        Desenvolvido por <strong>Cristian Marques</strong>
+      </span>
+      <span>
+        <a href="mailto:semusa@saude.gov.br">semusa@saude.gov.br</a>
+      </span>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.btn-download').forEach(botao => {
+      botao.addEventListener('click', function(e) {
+        const link = this.getAttribute('href');
+        if (link === '#' || link === '') {
+          e.preventDefault();
+          alert('Erro: o caminho do arquivo não foi configurado.\nVerifique o nome do arquivo.');
+          return;
+        }
+        const textoOriginal = this.innerHTML;
+        this.innerHTML = '⏳ Baixando...';
+        this.style.opacity = '0.7';
+        this.style.pointerEvents = 'none';
+        setTimeout(() => {
+          this.innerHTML = textoOriginal;
+          this.style.opacity = '1';
+          this.style.pointerEvents = 'auto';
+        }, 3000);
+      });
+    });
+  </script>
+
+</body>
+</html>
